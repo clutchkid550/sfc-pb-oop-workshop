@@ -5,19 +5,8 @@ The system should allow for adding students to a course,
   and determining the total number of students enrolled.
 You will need multiple classes in order to accomplish this and one will utilize the other when being invoked.
 See example:
-
-course = Course("Math 101")
-course.add_student(Student("Alice", 85))
-course.add_student(Student("Bob", 92))
-
-print(course.get_average_grade())  # Prints 88.5
-print(course.get_total_students())  # Prints 2
-
-
 Once your classes are complete, copy and paste the above example below them in order to test their functionality.
-"""
 
-"""
 Write a class that meets these requirements.
 
 Name:       Course
@@ -32,21 +21,52 @@ Behavior:
 
 """
 
+class Course:
+    def __init__(self, course_name):
+        self.course_name = course_name
+        self.students = []
+
+    def add_student(self, student):
+        self.students.append(student)
+
+    def get_average_grade(self):
+        if not self.students:
+            return False
+        else:
+            return sum(student.get_grade() for student in self.students) / self.get_total_students()
+
+    def get_total_students(self):
+        return len(self.students)
+
 """
 Write a class that meets these requirements.
 
 Name:       Student
-
 Required state:
    * name, the name of the student
    * grade, the grade of the student
-
 Behavior:
    * get_grade()          # Returns the grade of the student
 
-Example:
-   student = Student("Alice", 85)
-
-   print(student.get_grade())    # Prints 85
-
 """
+class Student:
+    def __init__(self, name, grade):
+        self.name = name
+        self.grade = grade
+
+    def get_grade(self):
+        return self.grade
+
+student = Student("Alice", 85)
+print(student.get_grade())    # Prints 85
+
+ #TEST
+
+course = Course("Math 101")
+course.add_student(Student("Alice", 85))
+course.add_student(Student("Bob", 92))
+
+print(course.get_average_grade())  # Prints 88.5
+print(course.get_total_students())  # Prints 2
+
+print(f'The average score between {course.students[0].name} and {course.students[1].name} is {course.get_average_grade()}')

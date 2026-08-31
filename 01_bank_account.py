@@ -8,26 +8,8 @@ The system should allow for the following operations:
   Check Balance: Retrieve the current balance of a bank account.
 See example:
 
-account = BankAccount(100)
-account.deposit(50)
-print(account.check_balance())  # Prints 150
-
-account.withdraw(30)
-print(account.check_balance())  # Prints 120
-
-account.withdraw(100)
-print(account.check_balance())  # Prints 20
-
-account.withdraw(50)  # Prints "Insufficient funds"
-print(account.check_balance())  # Prints 20
-
-
 Once your classes are complete, copy and paste the above example below them in order to test their functionality
-"""
 
-
-
-"""
 Write a class that meets these requirements.
 
 Name:       BankAccount
@@ -41,3 +23,31 @@ Behavior:
    * withdraw(amount)     # removes the amount from the balance, but does not allow the balance to go negative
 
 """
+class BankAccount:
+    def __init__(self, balance):
+        self.balance = balance
+
+    def check_balance(self):
+        return self.balance
+
+    def deposit(self, amount):
+        self.balance += amount
+
+    def withdraw(self, amount):
+        if amount > self.balance:
+            print("Insufficient funds")
+        else:
+            self.balance -= amount
+
+account = BankAccount(100)
+account.deposit(50)
+print(account.check_balance())  # Prints 150
+
+account.withdraw(30)
+print(account.check_balance())  # Prints 120
+
+account.withdraw(100)
+print(account.check_balance())  # Prints 20
+
+account.withdraw(50)  # Prints "Insufficient funds"
+print(account.check_balance())  # Prints 20
